@@ -17,6 +17,7 @@ import {
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { fetchPrescription } from './../../api/patient'
+import PatientAccordian from '../../components/Patient/PatientAccordian'
 const ShowPatient = () => {
   const patientId = useParams().id
   // console.log('patientId', patientId)
@@ -31,13 +32,13 @@ const ShowPatient = () => {
       {data && (
         <CCol xs={12}>
           <CListGroup>
-            <CListGroupItem>Name: {data.name}</CListGroupItem>
-            <CListGroupItem>Phone:</CListGroupItem>
-            <CListGroupItem>Age:</CListGroupItem>
-            <CListGroupItem>Email</CListGroupItem>
-            <CListGroupItem>Chief Complaint: </CListGroupItem>
-            <CListGroupItem>Profession: </CListGroupItem>
-            <CListGroupItem>Place: </CListGroupItem>
+            <CListGroupItem>Name: &nbsp; {data.name}</CListGroupItem>
+            <CListGroupItem>Phone: &nbsp;{data.phoneNumber}</CListGroupItem>
+            <CListGroupItem>Age: &nbsp;{data.age}</CListGroupItem>
+            <CListGroupItem>Email: &nbsp;{data.email}</CListGroupItem>
+            <CListGroupItem>Chief Complaint: &nbsp;{data.chiefComplaint}</CListGroupItem>
+            <CListGroupItem>Profession: &nbsp;{data.profession}</CListGroupItem>
+            <CListGroupItem>Place: &nbsp;{data.place}</CListGroupItem>
           </CListGroup>
         </CCol>
       )}
@@ -45,72 +46,9 @@ const ShowPatient = () => {
         <>
           <CCol xs={12}>
             <CAccordion alwaysOpen>
-              <CAccordionItem itemKey={1}>
-                <CAccordionHeader>27/02/2022 - New Optic Palace</CAccordionHeader>
-                <CAccordionBody>
-                  <CRow>
-                    <CCol xs={6}>
-                      <CCard>
-                        <CCardBody>
-                          <CCardTitle>Left</CCardTitle>
-                          <CCardText>
-                            <CListGroupItem>Sph:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Cyl:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Axis:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Add:&nbsp; 12</CListGroupItem>
-                          </CCardText>
-                        </CCardBody>
-                      </CCard>
-                    </CCol>
-                    <CCol xs={6}>
-                      <CCard>
-                        <CCardBody>
-                          <CCardTitle>Right</CCardTitle>
-                          <CCardText>
-                            <CListGroupItem>Sph:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Cyl:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Axis:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Add:&nbsp; 12</CListGroupItem>
-                          </CCardText>
-                        </CCardBody>
-                      </CCard>
-                    </CCol>
-                  </CRow>
-                </CAccordionBody>
-              </CAccordionItem>
-              <CAccordionItem itemKey={2}>
-                <CAccordionHeader>27/02/2022 - New Optic Palace</CAccordionHeader>
-                <CAccordionBody>
-                  <CRow>
-                    <CCol xs={6}>
-                      <CCard>
-                        <CCardBody>
-                          <CCardTitle>Left</CCardTitle>
-                          <CCardText>
-                            <CListGroupItem>Sph:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Cyl:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Axis:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Add:&nbsp; 12</CListGroupItem>
-                          </CCardText>
-                        </CCardBody>
-                      </CCard>
-                    </CCol>
-                    <CCol xs={6}>
-                      <CCard>
-                        <CCardBody>
-                          <CCardTitle>Right</CCardTitle>
-                          <CCardText>
-                            <CListGroupItem>Sph:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Cyl:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Axis:&nbsp; 12</CListGroupItem>
-                            <CListGroupItem>Add:&nbsp; 12</CListGroupItem>
-                          </CCardText>
-                        </CCardBody>
-                      </CCard>
-                    </CCol>
-                  </CRow>
-                </CAccordionBody>
-              </CAccordionItem>
+              {data.PatientPrescriptions.map((val, index) => (
+                <PatientAccordian key={index} pItemKey={1 + index} data={val} />
+              ))}
             </CAccordion>
           </CCol>
         </>
